@@ -42,8 +42,6 @@ public class AsyncPhotoDepute extends AsyncTask<String,Void, Bitmap> {
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
             bm = BitmapFactory.decodeStream(in);
-            System.out.println(urlString);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

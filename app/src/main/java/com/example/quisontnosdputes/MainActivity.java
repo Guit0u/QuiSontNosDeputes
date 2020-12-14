@@ -17,11 +17,13 @@ import static java.lang.String.valueOf;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static MyDatabase DB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //final JSONObject[] depute = {new JSONObject()};
+        DB = new MyDatabase(getApplicationContext());
         final double[][] coordonnees = {new double[2]};
         EditText EdAdresse = (EditText) findViewById(R.id.TextRecherche);
         Button recherche = (Button) findViewById(R.id.BoutonRecherche);
