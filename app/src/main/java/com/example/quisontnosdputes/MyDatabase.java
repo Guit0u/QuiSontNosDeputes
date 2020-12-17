@@ -7,11 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.Vector;
+
 public class MyDatabase extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_TABLE_NAME = "mydatabase";
     private static final String PKEY = "id";
     private static final String COL1 = "jsonDepute";
+    private static final String COL2 = "photo";
 
     MyDatabase(Context context) {
         super(context, DATABASE_TABLE_NAME, null, DATABASE_VERSION);
@@ -19,7 +23,7 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String DATABASE_TABLE_CREATE = "CREATE TABLE " + DATABASE_TABLE_NAME + " (" + PKEY + " INTEGER PRIMARY KEY," + COL1 + " TEXT);";
+        String DATABASE_TABLE_CREATE = "CREATE TABLE " + DATABASE_TABLE_NAME + " (" + PKEY + " INTEGER PRIMARY KEY," + COL1 + " TEXT," + COL2 +" TEXT);";
         db.execSQL(DATABASE_TABLE_CREATE);
     }
 
@@ -28,14 +32,15 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     }
 
-    public void insertData(int id, String jsonDepute){
+    public void insertData(int id, String jsonDepute, String photo){
         Log.i("Guitou"," Insert in database");
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         ContentValues values = new ContentValues();
 
-        values.put(PKEY,id);
+        values.put(PKEY, id);
         values.put(COL1, jsonDepute);
+        values.put(COL2, photo);
 
 
         db.insertOrThrow(DATABASE_TABLE_NAME,null, values);
@@ -44,8 +49,9 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
 
 
-    public void readData(){
+    public ArrayList<Depute> readDataCol1(){
         Log.i("Guitou", "Reading database...");
+        ArrayList<Depute> deputes = new ArrayList<>();
         String select = new String("SELECT * from " + DATABASE_TABLE_NAME);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(select, null);
@@ -54,9 +60,15 @@ public class MyDatabase extends SQLiteOpenHelper {
             cursor.moveToFirst();
             do {
                 Log.i("Guitou", "Reading: " + cursor.getString(cursor.getColumnIndex(COL1)));
+                String Json = cursor.getString(cursor.getColumnIndex(COL1));
+                String photo = cursor.getString(cursor.getColumnIndex(COL2));
+                Depute newDep = new Depute(Json,photo);
+                deputes.add(newDep);
             }
             while (cursor.moveToNext());
         }
+
+        return deputes;
     }
 
     public Boolean isInDB(int id){

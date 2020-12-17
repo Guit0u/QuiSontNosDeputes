@@ -2,4 +2,7 @@
 <resources>
     <string name="app_name">Qui sont nos député·es</string>
     <string name="favori">Mettre en\nfavori</string>
+    <string name="rechercher">Rechercher</string>
+    <string name="exemple">8 rue du Port Paris</string>
+    <string name="miniJeu">Découvrir un député</string>
 </resources>

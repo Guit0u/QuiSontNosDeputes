@@ -10,60 +10,54 @@
         android:id="@+id/vertical_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="300dp"
         android:orientation="vertical"
-        android:weightSum="4">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/Recherche"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/TextRecherche"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:hint="@string/exemple"
+                android:inputType="textPersonName" />
 
             <Button
                 android:id="@+id/BoutonRecherche"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
+                android:text="@string/rechercher"
+                android:textSize="12sp" />
 
             <ImageButton
                 android:id="@+id/GeoRecherche"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
+                app:srcCompat="@drawable/gps" />
         </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/StatText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TextView" />
 
         <ListView
             android:id="@+id/Favoris"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_height="wrap_content" >
 
-        <Button
+        </ListView>
+
+    <Button
             android:id="@+id/BoutonMiniJeu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/miniJeu" />
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

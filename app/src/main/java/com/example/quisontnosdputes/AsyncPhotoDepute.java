@@ -33,9 +33,14 @@ public class AsyncPhotoDepute extends AsyncTask<String,Void, Bitmap> {
     @Override
     protected Bitmap doInBackground(String... strings) {
         Bitmap bm = null;
+        String milieu = new String();
+        String[] splited = strings[0].split("\\s+");
+        for(int i=0;i<splited.length;i++) {
+            if(i==0){milieu = milieu.concat(splited[i]);}
+            else{milieu = milieu.concat("-"+splited[i]);}
+        }
 
-        String[] splited = strings[0].split(" ");
-        String urlString = "https://www.nosdeputes.fr/depute/photo/"+ splited[0] + "-" + splited[1] +"/100";
+        String urlString = "https://www.nosdeputes.fr/depute/photo/" + milieu + "/100";
         URL url = null;
         try {
             url = new URL(urlString);

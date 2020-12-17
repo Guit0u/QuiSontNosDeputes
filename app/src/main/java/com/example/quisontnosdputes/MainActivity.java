@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 
 import static java.lang.String.valueOf;
@@ -27,7 +31,12 @@ public class MainActivity extends AppCompatActivity {
         final double[][] coordonnees = {new double[2]};
         EditText EdAdresse = (EditText) findViewById(R.id.TextRecherche);
         Button recherche = (Button) findViewById(R.id.BoutonRecherche);
-        TextView stat = (TextView) findViewById(R.id.StatText);
+
+        ListView listView = (ListView) findViewById(R.id.Favoris);
+        ArrayList<Depute> deputes = DB.readDataCol1();
+        MyAdapter adapter = new MyAdapter(this,deputes);
+        listView.setAdapter(adapter);
+
         recherche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Intent intentDepute = new Intent(getApplicationContext(),Depute.class);
+                Intent intentDepute = new Intent(getApplicationContext(),DeputeActivity.class);
                 intentDepute.putExtra("JSON_DEPUTE",nomDepute);
                 startActivity(intentDepute);
 
